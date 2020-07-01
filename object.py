@@ -1,5 +1,6 @@
 """Definition of all the objects in the game"""
 
+
 class Object:
     """An object has coordinates
     and symbol for representation
@@ -18,6 +19,7 @@ class Character(Object):
 
     def __init__(self, x_character: int, y_character: int, representation: str) -> None:
         Object.__init__(self, x_character, y_character, representation)
+        self.number = int(representation)
 
 
 class Box(Object):
@@ -37,7 +39,7 @@ class Hole(Object):
     def __init__(self, x_hole: int, y_hole: int, depth: int) -> None:
         Object.__init__(self, x_hole, y_hole, None)
         self.depth = depth
-        self.representations = {1 : "o", 2: "O"}
+        self.representations = {1: "o", 2: "O"}
         self.representation = self.representations[self.depth]
 
     def reduce_depth(self):

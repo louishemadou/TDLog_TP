@@ -2,6 +2,7 @@
 
 import object as ob
 
+
 class Array:
     """2D array with adapted methods
     for objects
@@ -121,22 +122,3 @@ class Array:
                     if nb_axis != 1:
                         raise NameError('Ambiguous definition of turnstile')
         return character_list, height, width
-
-def get_action() -> str:
-    """Function asking for a valid action to do:
-    moving character of changing selected
-    character.
-    """
-    valid_action = False
-    while not valid_action:
-        action = str(
-            input('use zqsd or ^<v> to move or type (only) c to change moving character \n'))
-        valid_action = True
-        for char in action:
-            if char not in ["z", "q", "s", "d", "^", "<", "v", ">", "c"]:
-                valid_action = False
-            if "c" in action and len(action) > 1:
-                valid_action = False
-            if not valid_action:
-                print('enter a valid action !')
-    return action

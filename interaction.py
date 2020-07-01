@@ -28,7 +28,6 @@ class Interaction:
         """Character interaction with a
         Hole
         """
-        self.grid.message_for_player = "rip"
         x_dead_char = self.moving_character.x_obj
         y_dead_char = self.moving_character.y_obj
         void = ob.Void(x_dead_char, y_dead_char)
@@ -41,18 +40,6 @@ class Interaction:
         """Character interaction with a
         Door"""
         self.grid.win = True
-
-    def interaction_wall(self) -> None:
-        """Character interaction with a
-        Wall
-        """
-        self.grid.message_for_player = "I am too weak"
-
-    def interaction_player(self) -> None:
-        """Character interaction with another
-        character
-        """
-        self.grid.message_for_player = "Outch !"
 
     def interaction_box(self) -> None:
         """Character interaction with a
@@ -82,9 +69,6 @@ class Interaction:
                 # Destructing the box
                 void = ob.Void(self.target.x_obj, self.target.y_obj)
                 self.grid.obj_list[self.target] = void
-        elif isinstance(beyond_target, ob.Box):
-            # Impossible to push two boxes
-            self.grid.message_for_player = "I am too weak"
 
     def get_arms(self) -> (list, ob.TurnstileAxis):
         """Function returning the turnstile
@@ -190,8 +174,6 @@ class Interaction:
             condition = self.can_rotate()[0]
             if condition:
                 self.rotate()
-            else:
-                self.grid.message_for_player = "Turnstile cannot move !"
 
     def interaction(self) -> None:
         """Function calling the right
@@ -203,10 +185,6 @@ class Interaction:
             self.interaction_door()
         elif isinstance(self.target, ob.Hole):
             self.interaction_hole()
-        elif isinstance(self.target, ob.Wall):
-            self.interaction_wall()
-        elif isinstance(self.target, ob.Character):
-            self.interaction_player()
         elif isinstance(self.target, ob.Box):
             self.interaction_box()
         elif isinstance(self.target, ob.TurnstileBloc):
